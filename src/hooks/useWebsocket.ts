@@ -9,6 +9,11 @@ export default function useWebsocket (symbol: string) {
   const [trades, setTrades] = useState<Trade[]>([])
   const [depth, setDepth] = useState<Depth>()
 
+  useEffect(() => {
+    setTrades([])
+    setDepth(undefined)
+  }, [symbol])
+
   useEffect(function createWebsocket () {
     ws.current = new WebSocket('wss://stream.binance.com:9443/stream')
     ws.current.onopen = () => setIsWsConnected(true)
