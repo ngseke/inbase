@@ -25,6 +25,7 @@ export default function SymbolAutocomplete ({ value, onChange }: SymbolAutocompl
       onChange={(_, value) => {
         if (value) onChange(value)
       }}
+      disabled={!symbols}
     />
   )
 }
