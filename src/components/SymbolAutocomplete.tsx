@@ -26,6 +26,7 @@ export default function SymbolAutocomplete ({ value, onChange }: SymbolAutocompl
         if (value) onChange(value)
       }}
       disabled={!symbols}
+      disableClearable
     />
   )
 }
