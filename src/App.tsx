@@ -1,24 +1,32 @@
-import logo from './logo.svg'
+import MarketDepthTable from './components/MarketDepthTable'
+import TradeTable from './components/TradeTable'
+import useWebsocket from './hooks/useWebsocket'
+import Container from '@mui/material/Container'
+import Grid from '@mui/material/Grid'
+import { useState } from 'react'
 
-function App () {
+export default function App () {
+  const [symbol, setSymbol] = useState('btcusdt')
+  const { trades, depth } = useWebsocket(symbol)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <input type="text" value={symbol} onChange={e => setSymbol(e.target.value)} />
+        </Grid>
+
+        <Grid item xs={12} md={6}>
+          <h2>Market Depth</h2>
+          <MarketDepthTable depth={depth} />
+        </Grid>
+
+        <Grid item xs={12} md={6}>
+          <h2>Trades</h2>
+          <TradeTable trades={trades} />
+        </Grid>
+      </Grid>
+
+    </Container>
   )
 }
-
-export default App
