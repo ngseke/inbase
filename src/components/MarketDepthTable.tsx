@@ -19,17 +19,15 @@ function getSortedDepthList (list: Depth['asks'] | Depth['bids']) {
     .sort((a, b) => b.price - a.price)
 }
 
-const limit = 10
-
 export default function MarketDepthTable ({ depth }: MarketDepthTableProps) {
   const asks = useMemo(() => {
     if (!depth) return []
-    return getSortedDepthList(depth.asks).slice(0, limit)
+    return getSortedDepthList(depth.asks)
   }, [depth])
 
   const bids = useMemo(() => {
     if (!depth) return []
-    return getSortedDepthList(depth.bids).slice(-limit)
+    return getSortedDepthList(depth.bids)
   }, [depth])
 
   return (
