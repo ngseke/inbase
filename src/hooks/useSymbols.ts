@@ -5,9 +5,13 @@ import ExchangeSymbol from '../types/ExchangeSymbol'
 export default function useSymbols () {
   const [symbols, setSymbols] = useState<ExchangeSymbol[]>()
 
+  async function fetchSymbols () {
+    const { data } = await axios.get(' https://api.binance.com/api/v3/exchangeInfo')
+    setSymbols(data.symbols)
+  }
+
   useEffect(() => {
-    axios.get(' https://api.binance.com/api/v3/exchangeInfo')
-      .then(({ data }) => setSymbols(data.symbols))
+    fetchSymbols()
   }, [])
 
   return {
