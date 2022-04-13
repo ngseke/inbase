@@ -58,7 +58,7 @@ export default function MarketDepthTable ({ depth }: MarketDepthTableProps) {
             {[...bids].map((bid, index) => (
               <MarketDepthRow
                 key={index}
-                showAskLabel={!index}
+                showBidLabel={!index}
                 {...bid}
               />
             ))}

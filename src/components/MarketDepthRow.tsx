@@ -18,8 +18,8 @@ export default function MarketDepthRow ({
     <TableRow>
       <TableCell align="right">{price.toFixed(2)}</TableCell>
       <TableCell align="right">{quantity}</TableCell>
-      {showAskLabel && <TableCell>Bid</TableCell>}
-      {showBidLabel && <TableCell>Ask</TableCell>}
+      {showAskLabel && <TableCell>Ask</TableCell>}
+      {showBidLabel && <TableCell>Bid</TableCell>}
     </TableRow>
   )
 }
