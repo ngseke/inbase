@@ -9,6 +9,11 @@ export default function useWebsocket (symbol: string) {
   const [trades, setTrades] = useState<Trade[]>([])
   const [depth, setDepth] = useState<Depth>()
 
+  const currentSymbol = useRef<string>()
+  useEffect(() => {
+    currentSymbol.current = symbol
+  }, [symbol])
+
   useEffect(() => {
     setTrades([])
     setDepth(undefined)
@@ -37,6 +42,7 @@ export default function useWebsocket (symbol: string) {
     }))
 
     ws.current.onmessage = (e) => {
+      if (symbol !== currentSymbol.current) return
       try {
         const { stream, data } = JSON.parse(e.data)
         if (/aggTrade/.test(stream)) {
